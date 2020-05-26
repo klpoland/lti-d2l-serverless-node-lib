@@ -2,9 +2,9 @@ module.exports.config = () => {
     const config = {
         clientId: 'd2l_oauth2_client_id',
         clientSecret: 'd2l_oauth2_client_secret',
-        hostUrl: 'https://ugatest2.view.usg.edu',
+        hostUrl: 'https://your.platform.url',
         accessTokenUrl: 'https://auth.brightspace.com/core/connect/token',
-        clientUrl: 'https://testing.appool.org'
+        clientUrl: 'https://your.host'
     }
     return config
 }
