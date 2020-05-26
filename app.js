@@ -33,14 +33,14 @@ app.post('/authorize', async (req,res) => {
 //to dynamodb, if one does not already exist
 
   await registerPlatform(
-    'https://ugatest2.view.usg.edu',
+    config().hostUrl,
     'D2L',
-    'fbff46cd-67ff-4986-b7f3-37df48da9afe',
-    'https://ugatest2.view.usg.edu/d2l/lti/authenticate',
+    'client_id_from_platform',
+    config().hostUrl + '/d2l/lti/authenticate',
     'https://auth.brightspace.com/core/connect/token',
     'https://api.brightspace.com/auth/token',
-    'https://your.host/redirect',
-    {'method': { S: 'JWK_SET' }, 'key': { S: 'https://your.platform.url/.well-known/jwks' } }
+    config().clientUrl + '/redirect',
+    {'method': { S: 'JWK_SET' }, 'key': { S: config().hostUrl + '/.well-known/jwks' } }
   )
 
 //once platform is set up, using lti-node-library which I modified to run on lambda with serverless
