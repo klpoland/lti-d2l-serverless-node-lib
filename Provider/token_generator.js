@@ -128,45 +128,26 @@ async function getAccessTokenValence(req, res) {
     return tokenResponse.data
 }
 
+//getting 500 error: "unknown exception ocurred"
 function getAccessTokenLTI(req) {
-  return new Promise(async function(resolve, reject) {
-    let assertion = await formatJWTforAccessToken(req)
+  const clientAssertion = await formatJWTforAccessToken(req)
+  console.log("Client Assertion: ", clientAssertion)
 
-    let options = {
-      method: "POST",
-      uri: req.session.platform_DBinfo.consumerAccessTokenURL.S,
-      headers: {
-        content_type: "application/x-www-form-urlencoded"
-      },
-      form: {
-        grant_type: "client_credentials",
-        client_assertion_type:
-          "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-        client_assertion: assertion,
-        scope: 'https://purl.imsglobal.org/spec/lti-ags/scope/lineitems'
-      }
-    };
+  //payload for the request for access token, using client assertion
+  const payload = {
+    'grant_type': 'client_credentials',
+    'client_assertion_type': 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+    'scope': 'https://purl.imsglobal.org/spec/lti-ags/scope/lineitems', //route for request
+    'client_assertion': clientAssertion
+  }
 
-    request(options, function(err, response, body) {
-      if (err) {
-        console.log("Get Token Error - request failed: " + err.message);
-        reject(body);
-      } else if (response.statusCode !== 200) {
-        console.log(
-          "Get Token Error - Service call failed:  " +
-            response.statusCode +
-            "\n" +
-            response.statusMessage +
-            "\n" +
-            options.uri
-        );
-        reject(body);
-      } else {
-        resolve(body);
-      }
-    });
-  });
+  let token = await axios.post(req.session.platform_DBinfo.consumerAccessTokenURL.S, qs.stringify(payload), 
+    { headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
 
+  return token
 }
 
 module.exports = { formatJWTforAccessToken, getAuthCode, getAccessTokenValence, getAccessTokenLTI };
