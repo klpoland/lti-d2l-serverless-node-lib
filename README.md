@@ -5,11 +5,11 @@ The LMS in mind for this library is D2L/Brightspace and it uses OAuth 2.0 for se
 
 To Use:
 
-1. 
+1. Clone this repository:
 ```
-git clone
+git clone https://github.com/klpoland/lti-node-lib.git
 ```
-2. 
+2. Install required libraries to working directory:
 ```
 npm install
 ```
