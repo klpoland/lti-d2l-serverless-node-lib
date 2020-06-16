@@ -34,10 +34,10 @@ In my case, both the client URL and the callback URL for OAuth 2.0 were set up u
 
 ### 4. Now look at the app.js file. It includes four Express endpoints:
     
-    * /authorize for registering your platform on DynamoDB and sending login information to OIDC (e.g. login_hint) in the first leg of the authentication process. The OIDC login endpoint should respond with an ID token (JSON web token) containing information about the requesting user that you specified when setting up LTI 1.3
-    * /redirect is where the ID token is sent to and where the page redirects after logging in to OIDC, here is where the tool is launched. The ID token carries a signature and kid attached to a JSON web key (JWK) on the brightspace JSON web keyset (JWKS) endpoint. The launchTool function verifies the JWT and makes sure all the required information is contained within the token before launching (redirecting to) the tool.
-    * /example shows a boiler plate proof of concept for the tool that takes information in the ID token, formats, and presents it to the user.
-    * /.well-known/jwks contains a public JWKS that the client generates (rather than the platform) which is used to build, sign, and verify JWTs used to access LTI 1.3 scopes The JWKS endpoint contains a key for each LTI 1.3 tool.
+* /authorize for registering your platform on DynamoDB and sending login information to OIDC (e.g. login_hint) in the first leg of the authentication process. The OIDC login endpoint should respond with an ID token (JSON web token) containing information about the requesting user that you specified when setting up LTI 1.3
+* /redirect is where the ID token is sent to and where the page redirects after logging in to OIDC, here is where the tool is launched. The ID token carries a signature and kid attached to a JSON web key (JWK) on the brightspace JSON web keyset (JWKS) endpoint. The launchTool function verifies the JWT and makes sure all the required information is contained within the token before launching (redirecting to) the tool.
+* /example shows a boiler plate proof of concept for the tool that takes information in the ID token, formats, and presents it to the user.
+* /.well-known/jwks contains a public JWKS that the client generates (rather than the platform) which is used to build, sign, and verify JWTs used to access LTI 1.3 scopes The JWKS endpoint contains a key for each LTI 1.3 tool.
    
 
 **Note:**
