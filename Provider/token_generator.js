@@ -20,7 +20,6 @@ async function formatJWTforAccessToken(req) {
 
   //get kid of key we want to use
   const kidToUse = myKeys.data.keys[0].kid
-  console.log(kidToUse)
 
   //set up header for json web token to use in request
   const jwtHeader = {
@@ -55,8 +54,6 @@ async function formatJWTforAccessToken(req) {
           privateKey[item] = keyObj[item].S
         }
       }
-
-      console.log('Private key object: ', privateKey)
 
       //payload for jwt
       const jwtPayload = {
