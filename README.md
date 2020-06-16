@@ -6,16 +6,16 @@ The LMS in mind for this library is D2L/Brightspace and it uses OAuth 2.0 for se
 To Use:
 
 1. 
-'''
+```
 git clone
-'''
+```
 2. 
-'''
+```
 npm install
-'''
+```
 3. Create a config.js file in the Provider folder and copy and paste this code:
 
-'''javascript
+```javascript
 module.exports.config = () => {
     const config = {
         clientId: '',
@@ -27,7 +27,7 @@ module.exports.config = () => {
     }
     return config
 }
-'''
+```
 Then paste your Client ID and Secret received from setting up OAuth 2.0 on your LMS platform, the callback URL you provided to set up OAuth 2.0, the host URL of your LMS, and the base URL where your application will run.
 
 In my case, both the client URL and the callback URL for OAuth 2.0 were set up using API Gateway on AWS.
