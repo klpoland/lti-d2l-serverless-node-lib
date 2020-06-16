@@ -229,7 +229,6 @@ async function launchTool(req, res, path) {
       let basic_decoded = jwt.decode(jwt_string, {complete: true});
       req.session.jwt_header = basic_decoded.header
       req.session.jwt_sig = basic_decoded.signature
-      console.log('decoded jwt: ', basic_decoded)
 
       //Get the key to verify the JWT
       const keysRes = await axios.get(req.session.platform_DBinfo.consumerAuthorizationconfig.M.key.S)
