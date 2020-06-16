@@ -67,10 +67,6 @@ async function formatJWTforAccessToken(req) {
         "exp" : Math.floor(Date.now()/1000 + 30*60),
         "jti" : crypto.randomBytes(16).toString("hex")
       }
-
-      console.log(jwtPayload)
-      console.log(jwkToPem(privateKey, {private: true}))
-      console.log(jwkToPem(myKeys.data.keys[0]))
       
       //encode and sign jwt
       const requestToken = jwt.sign(jwtPayload, jwkToPem(privateKey, {private: true}), {keyid: kidToUse, algorithm: 'RS256'})
@@ -115,7 +111,6 @@ async function getAccessTokenValence(req, res) {
     })
   
     const creds = new Buffer(config().clientId + ":" + config().clientSecret).toString('base64')
-    console.log(creds)
   
     const tokenResponse = await axios.post(config().accessTokenUrl, payload,
       { headers: {
@@ -131,7 +126,6 @@ async function getAccessTokenValence(req, res) {
 //getting 500 error: "unknown exception ocurred"
 function getAccessTokenLTI(req) {
   const clientAssertion = await formatJWTforAccessToken(req)
-  console.log("Client Assertion: ", clientAssertion)
 
   //payload for the request for access token, using client assertion
   const payload = {
