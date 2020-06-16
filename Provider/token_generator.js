@@ -18,7 +18,7 @@ async function formatJWTforAccessToken(req) {
   //retrieve keys from our keyset endpoint
   const myKeys = await axios.get(config().clientUrl + "/.well-known/jwks")
 
-  //get kid of key we want to use
+  //get kid of key we want to use, assumes there is one kid, TODO: change this to be more dynamic
   const kidToUse = myKeys.data.keys[0].kid
 
   //set up header for json web token to use in request
