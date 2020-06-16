@@ -44,4 +44,4 @@ In my case, both the client URL and the callback URL for OAuth 2.0 were set up u
 
 This code runs on AWS Lambda using the [Serverless Framework](https://www.serverless.com/framework/docs/providers/aws/guide/quick-start/). To use Serverless, you will need to set up your environment including a serverless.yml file (link to quickstart above).
 
-Use: You may download and modify this code however you see fit.
+You may download and modify this code however you see fit.
