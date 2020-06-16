@@ -2,7 +2,6 @@ const express = require('express')
 const sls = require('serverless-http')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const b64 = require('base64url')
 
 //lti-node-library
 const { registerPlatform } = require('./Provider/register_platform.js');
@@ -23,9 +22,6 @@ app.use(session({
 }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.engine('html', require('ejs').renderFile)
-app.set('view engine', 'ejs')
-app.set('views', __dirname)
 
 app.post('/authorize', async (req,res) => {
 
