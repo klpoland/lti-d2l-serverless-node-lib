@@ -66,7 +66,6 @@ function createCronExpression(times) {
   let cronObj = {'min': '', 'hr': '', 'dom': '', 'mon': '', 'dow': '?', 'yr': ''}
 
   //get date information, all expire on same day
-  console.log('cron times: ', times)
   genDate = new Date(times[0])
   cronObj.dom = genDate.getDate()
   cronObj.mon = genDate.getMonth() + 1
@@ -87,7 +86,6 @@ function createCronExpression(times) {
   }
 
   const cronExpression = `${cronObj.min} ${cronObj.hr} ${cronObj.dom} ${cronObj.mon} ${cronObj.dow} ${cronObj.yr}`
-  console.log("cron: ", cronExpression)
   return `cron(${cronExpression})`
 }
 
@@ -141,11 +139,9 @@ async function renderJWKSendpoint(res) {
   await dynamodb.scan(params).promise().then(function (result) {
     if (Object.keys(result).length !== 0) {
       let pubkeys = {'keys': []}
-      console.log(result.Items)
       const keyList = result.Items
       for (i in keyList) {
         const key = keyList[i]
-        console.log(key)
         const formattedKey = {'alg': key.alg.S, 'e': key.e.S, 'kid': key.kid.S, 'kty': key.kty.S, 'n': key.n.S, 'use': key.use.S, 'exp': key.exp.N}
         pubkeys.keys.push(formattedKey)
       }
