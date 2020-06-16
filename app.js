@@ -13,7 +13,7 @@ const { launchTool } = require('./Provider/launch_validation.js')
 const app = express()
 
 app.use(session({
-  name: 'lti_v1p3_library',
+  name: 'lti_v1p3_app_session',
   secret: create_unique_string(10, false),
   saveUninitialized: true,
   resave: true,
